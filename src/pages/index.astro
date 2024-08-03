@@ -1,20 +1,13 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Greeting from '../components/Greeting';
 
+import '../styles/global.css'
+
+const title = "Home Page 🚀"
 ---
-
-<html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-		<meta name="viewport" content="width=device-width">
-		<meta name="generator" content={Astro.generator}>
-		<title>Astro</title>
-	</head>
-	<body>
-		<a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="/about/">About</a>
-        
-		<h1>Hello, Astro 🚀</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={title}>
+	<h2>something interesting here!</h2>
+	<Greeting messages={["Hi", "Hello", "Howdy", "Hey there"]}/>
+	<Greeting client:load messages={["Hi", "Hello", "Howdy", "Hey there"]}/>
+</BaseLayout>

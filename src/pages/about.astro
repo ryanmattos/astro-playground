@@ -1,24 +1,48 @@
 ---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css'
 
+const title = "About Me";
+
+const identity = {
+    fullName: "Michael Scott",
+    country: "United States",
+    occupation: "Sales Manager at Michael Scott Paper's Company",
+    hobbies: ["a man", "a saviour", "a lover", "what else you want"]
+};
+
+const skills = ["be funny", "be clever", "be pretty", "be hot"]
+
+const happy = false;
+const sexy = true;
+const goal = 3;
+
+const skillColor = "lightgreen";
+const fontWeight = "bold";
+const textCase = "uppercase";
+
+const randomHobby = () => identity.hobbies[Math.round( Math.random() * ( identity.hobbies.length - 1 ) )]
 ---
+<BaseLayout>
+    <h1>About <del>Me</del> {identity.fullName} - A book by {identity.fullName}</h1>
+    <p>Here are a few things about me:</p>
+    <ul>
+        <li>I live in {identity.country} and i work as a {identity.occupation}.</li>
+        {identity.hobbies.length >= 2 && 
+            <li>Two of my hobbies are: {randomHobby()} and {randomHobby()}</li>
+        }
+    </ul>
+    
+    <p>My skills:</p>
+    <ul>
+        {skills.map(skill => <li class="skill">{skill}</li>)}
+    </ul>
 
-<html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-		<meta name="viewport" content="width=device-width">
-		<meta name="generator" content={Astro.generator}>
-		<title>Astro - About</title>
-	</head>
-	<body>
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="/about/">About</a>
+    <p>I am {!happy && <>not</>} happy right now</p>
 
-        <h1>About Me</h1>
-        <h2>... and my new Astro site!</h2>
-        <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
-        <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
-      </body>
-	</body>
-</html>
+    {sexy && <p>I'm very hot {!happy && <>though</>}!</p>}
+
+    {goal === 3 ? <p>My goal is to be sexier in 3 days.</p> : <p>I died 3 days ago</p>}
+</BaseLayout>

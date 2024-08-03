@@ -1,0 +1,22 @@
+---
+import TagItem from "./TagItem.astro";
+
+const allPosts = await Astro.glob('../pages/posts/*.md');
+const allTags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+
+const { tags } = Astro.props;
+---
+<div class="tags">
+    { tags
+        ? tags.map((tag: any) => <TagItem name={ tag }/>)  
+        : allTags.map((tag: any) => <TagItem name={ tag }/>)
+    }
+</div>
+
+<style>
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 12px;
+    }
+</style>

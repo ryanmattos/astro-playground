@@ -1,22 +1,15 @@
 ---
+import BlogPost from '../components/BlogPost.astro';
+import BaseLayout from '../layouts/BaseLayout.astro'
+import '../styles/global.css'
 
+const allPosts = await Astro.glob('./posts/*.md');
+const title = "My Astro Learning Blog"
 ---
 
-<html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-		<meta name="viewport" content="width=device-width">
-		<meta name="generator" content={Astro.generator}>
-		<title>Astro - Blog</title>
-	</head>
-	<body>
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="/about/">About</a>
-        
-        <h1>Blog</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At natus illum voluptates incidunt iure placeat, cumque nam voluptatem excepturi nobis non rem laborum, dolore maxime, minima asperiores repudiandae nihil repellat.</p>
-      </body>
-	</body>
-</html>
+<BaseLayout pageTitle={title} >
+    <p>This is where I will post about my journey learning Astro.</p>
+    <ul>
+        { allPosts.map(post => <BlogPost url={ post.url } title={ post.frontmatter.title } />) }
+    </ul>
+</BaseLayout>
